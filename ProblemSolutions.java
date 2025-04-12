@@ -78,7 +78,7 @@ public class ProblemSolutions {
      * @param k         - value k, such that all numbers divisible by this value are first
      */
 
-    public void mergeSortDivisibleByKFirst(int[] values, int k) {
+     public void mergeSortDivisibleByKFirst(int[] values, int k) {
 
         // Protect against bad input values
         if (k == 0)  return;
@@ -104,18 +104,7 @@ public class ProblemSolutions {
 
     private void mergeDivisbleByKFirst(int arr[], int k, int left, int mid, int right)
     {
-        // YOUR CODE GOES HERE, THIS METHOD IS NO MORE THAN THE STANDARD MERGE PORTION
-        // OF A MERGESORT, EXCEPT THE NUMBERS DIVISIBLE BY K MUST GO FIRST WITHIN THE
-        // SEQUENCE PER THE DISCUSSION IN THE PROLOGUE ABOVE.
-        //
-        // NOTE: YOU CAN PROGRAM THIS WITH A SPACE COMPLEXITY OF O(1) OR O(N LOG N).
-        // AGAIN, THIS IS REFERRING TO SPACE COMPLEXITY. O(1) IS IN-PLACE, O(N LOG N)
-        // ALLOCATES AUXILIARY DATA STRUCTURES (TEMPORARY ARRAYS). IT WILL BE EASIER
-        // TO CODE WITH A SPACE COMPLEXITY OF O(N LOG N), WHICH IS FINE FOR PURPOSES
-        // OF THIS PROGRAMMING EXERCISES.
-
         return;
-
     }
 
 
@@ -165,11 +154,17 @@ public class ProblemSolutions {
      */
 
     public static boolean asteroidsDestroyed(int mass, int[] asteroids) {
-
-        // YOUR CODE GOES HERE, CONSIDER USING ARRAYS.SORT()
-
-        return false;
-
+        Arrays.sort(asteroids);
+        int currentMass = mass;
+        
+        for (int asteroid : asteroids) {
+            if (currentMass < asteroid) {
+                return false;
+            }
+            currentMass += asteroid;
+        }
+        
+        return true;
     }
 
 
@@ -203,12 +198,25 @@ public class ProblemSolutions {
      */
 
     public static int numRescueSleds(int[] people, int limit) {
-
-        // YOUR CODE GOES HERE, CONSIDER USING ARRAYS.SORT
-
-        return -1;
-
+        Arrays.sort(people);
+        
+        int sleds = 0;
+        int left = 0;
+        int right = people.length - 1;
+        
+        while (left <= right) {
+            if (left < right && people[left] + people[right] <= limit) {
+                left++;
+            }
+            right--;
+            sleds++;
+        }
+        
+        return sleds;
     }
 
 } // End Class ProblemSolutions
+
+
+
 
